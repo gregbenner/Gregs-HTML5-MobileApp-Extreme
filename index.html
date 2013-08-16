@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]>    <html class="no-js iem7"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>Corks</title>
+        <meta name="description" content="">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <meta http-equiv="cleartype" content="on">
+
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/touch/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touch/apple-touch-icon-114x114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="img/touch/apple-touch-icon-57x57-precomposed.png">
+        <link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
+
+        <!-- Tile icon for Win8 (144x144 + tile color) -->
+        <meta name="msapplication-TileImage" content="img/touch/apple-touch-icon-144x144-precomposed.png">
+        <meta name="msapplication-TileColor" content="#222222">
+
+
+        <!-- For iOS web apps. Delete if not needed. https://github.com/h5bp/mobile-boilerplate/issues/94 -->
+        <!--
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="">
+        -->
+
+        <!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
+        <!--
+        <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
+        -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+
+		<div id="activity" data-role="page">
+			<div data-role="header">
+			<h1>Activity</h1>
+				<div data-role="navbar" data-iconpos="bottom">
+					<ul> 
+						<li><a data-icon="star" data-transition="slide" class="ui-btn-active" href="#activity">Activity</a></li>
+						<li><a data-icon="grid" data-transition="slide" href="#manage">Manage</a></li>
+						<li><a data-icon="info" data-transition="slide" href="#find">Find</a></li>
+						<li><a data-icon="gear" data-transition="slide" href="#settings">Settings</a></li>
+						<li><a data-icon="search" data-transition="slide" href="#search">Search</a></li>
+					</ul>
+				</div>
+			</div>
+			<div data-role="content">
+				<p>page content</p>
+			</div>
+			<div data-role="footer">
+				<p>footer</p>
+			</div>
+		</div>
+
+		<div id="manage" data-role="page">
+			<div data-role="header">
+			<h1>Manage</h1>
+				<div data-role="navbar" data-iconpos="bottom">
+					<ul> 
+						<li><a data-icon="star" data-transition="slide" href="#activity">Activity</a></li>
+						<li><a data-icon="grid" data-transition="slide" class="ui-btn-active" href="#manage">Manage</a></li>
+						<li><a data-icon="info" data-transition="slide" href="#find">Find</a></li>
+						<li><a data-icon="gear" data-transition="slide" href="#settings">Settings</a></li>
+						<li><a data-icon="search" data-transition="slide" href="#search">Search</a></li>
+					</ul>
+				</div>
+			</div>
+			<div data-role="content">
+				
+						<h2>Add A Wine</h2>
+						<form id="manage-form" data-ajax="false">
+							<label for="wine_name">Wine Name:</label>
+							<input type="text" name="wine_name" id="wine_name" data-mini="true">
+							<label for="winery_name">Winery Name:</label>
+							<input type="text" name="winery_name" id="winery_name" data-mini="true">
+
+							<label for="color_id" class="select">Color:</label>
+							<select name="wine_color" id="color_id" data-mini="true"></select>
+
+							<label for="wine_description">Wine Description</label>
+							<textarea name="wine_description" id="wine_description">
+							</textarea>
+
+							<label for="is_add">Do you want to add this wine to your cellar?</label>
+							<input type="checkbox" name="is_add" id="is_add" class="custom">
+
+							<div id="cellar_que" style="display:none;">
+								<label for="cellar_qty">Cellar Quantity: </label>
+								<input type="text" name="cellar_qty" id="cellar_qty" value="">
+								<label for="cellar_description">Cellar Notes:</label>
+								<textarea id="cellar_description" name="cellar_description"></textarea>
+							</div>
+
+			</form>
+			<div data-role="footer">
+				<p>footer</p>
+			</div>
+		</div>
+		
+	
+
+			
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.js"></script>
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/iScroll/5.0.4/iscroll-min.js"></script>
+	<script src="js/app.js"></script>
+    <script src="js/helper.js"></script>
+    <script src="js/webSQLinterface.js"></script>
+	<script>
+		
+		
+		window.addEventListener('load', function() {
+			setTimeout(function() {
+				window.scrollTo(0,1);
+			}, 0);
+		});
+
+		$(document).ready(function() {
+			$('#is_add').on('change', function(){
+				$this = $(this);
+				$cellar_que = $('#cellar_que');
+
+				if ($this.is(':checked')){
+					$cellar_que.show();
+					$cellar_que.find('input').addClass('required');
+				} else {
+					$cellar_que.hide();
+					$cellar_que.find('input').removeClass('required');
+				}
+			});
+			
+		});
+		
+	</script>
+       
+    </body>
+</html>
