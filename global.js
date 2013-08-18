@@ -4,18 +4,28 @@ var map,
 	lng,
 	infowindow = new google.maps.InfoWindow();
 
-
-$(document).ready(function(){
+$(window).bind('hashchange', function(e) {
 	newHash = window.location.hash.substring(1);
 	
 	if (newHash == "find") {
-		if ($.trim($("#map").html()) == "") {
+		if ($.trim($("#map").html()) === "") {
 			navigator.geolocation.getCurrentPosition(successPosition, errorPosition);
 		}
+		else if (newHash === "activity") {
+			grabActivity();
+		}
 	}
+	else {
+		grabActivity();
+	}
+	e.preventDefault();
+})
+
+$(document).ready(function(){
+	
 	
 		
-	db = openDatabase('myCorks', '1.0', 'My Corks Database', 2 * 1024 * 1024);
+	
 	
 	db.transaction(function (tx) {
 		tx.executeSql("CREATE TABLE IF NOT EXISTS wines (wine_id INTEGER PRIMARY KEY AUTOINCREMENT, wine_name, wine_description, wine_abv, winery_id, color_id, created_at DATETIME)", null, sR, fR);

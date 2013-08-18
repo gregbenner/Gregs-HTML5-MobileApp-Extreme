@@ -23,7 +23,7 @@ function successPosition(position) {
 	        map: map,
 	});
 	google.maps.event.addListener(marker, 'click', function() {
-		getInfoWindowEvent(marker, 'Hello!');
+		getInfoWindowEvent(marker, 'Home Sweet Home!');
 	});
 
 	findPlaces();

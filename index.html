@@ -11,12 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="start_location_here">
-	<!-- For first-generation iPad: -->
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="start_location_hereg">
-	<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-	<link rel="apple-touch-icon-precomposed" href="start_location_here">
-	<link rel="apple-touch-startup-image" href="start_location_here" />  
+	
 	<!-- Main Stylesheet -->
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
 
@@ -24,6 +19,7 @@
 	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
 	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.min.js"></script>
 
 	<!-- DB Creation Scripts -->
 	<script src="global.js"></script>
@@ -31,6 +27,7 @@
 	<script src="util.js"></script>
 	<script src="geo.js"></script>
 	<script src="social.js"></script>
+	<script src="helper.js"></script>
 
 	<!-- For Label Errors -->
 	<style type="text/css" media="screen">
@@ -43,10 +40,10 @@
 
 <body>
 	
-		<div id="activity" data-role="page">
+		<div id="activity" data-role="page" class="page">
 			<div data-role="header">
 			<h1>Your Activity</h1>	
-			<a href="javascript:void(0);" data-role="button" onclick="grabActs();" class="ui-btn-right" data-icon="refresh">Refresh</a> 	
+			<a href="javascript:void(0);" data-role="button" onclick="grabActivity();" class="ui-btn-right" data-icon="refresh">Refresh</a> 	
 			<div data-role="navbar" data-iconpos="bottom">
 				<ul>
 					<li><a data-icon="star" class="ui-btn-active" href="#activity">Activity</a></li>
@@ -59,7 +56,7 @@
 			</div><!-- /footer -->
 
 			<div id="my-activity" data-role="content">	
-				<ul data=role="list-view" id="my-activity-list"></ul>
+				<ul data-role="list-view" id="my-activity-list"></ul>
 			</div><!-- /content -->
 
 			<div data-role="footer">
@@ -67,7 +64,7 @@
 			</div><!-- /footer -->
 		</div>
 
-		<div id="manage" data-role="page">
+		<div id="manage" data-role="page" class="page">
 			<div data-role="header">
 				<h1>Manage</h1>		
 				<div data-role="navbar" data-iconpos="bottom">
@@ -81,7 +78,7 @@
 				</div><!-- /navbar -->
 			</div><!-- /footer -->
 
-			<div class="page" data-role="content">
+			<div data-role="content">
 				<h2>Add A Wine</h2>	
 				<div class="success" id="success-msg" style="display: none;">Awesome, your wine is created!</div>
 				<div class="error" id="error-msg" style="display: none;">You have errors in your form, please check the data.</div>
@@ -152,7 +149,15 @@
 	
 </div> <!--! end of #container -->
 
-
+<script id="activity-template" type="text/x-handlebars-template">
+<li>
+	<a href="#wineDetail" onclick="viewWine({{activity_id}})">
+		<h2>{{wine_name}}</h2>
+		<p>Added {{activity_quantity}} to My Cellar</p>
+		<p class="pad">{{timeDiffActivity created_at}}</p>
+	</a>
+</li>
+</script>
 
 
 </body>

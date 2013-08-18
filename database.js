@@ -1,3 +1,37 @@
+db = openDatabase('myCorks', '1.0', 'My Corks Database', 2 * 1024 * 1024);
+
+function grabActivity() {
+	db.transaction(function (tx) {
+		tx.executeSql("SELECT wine_name, wine_description, activity_note, activity_quantity, activity_id, activity.wine_id, activity.created_at from activity INNER JOIN wines on activity.wine_id = wines.wine_id order by activity.created_at desc", null,
+			function(tx, res) {
+				if(res.rows.length === 0) {
+					// No Results
+					console.log("no activity");
+				}
+				else {
+					// results go here
+					$('#my-activity-list').listview();
+
+					var len = res.rows.length,
+						code = "",
+						obj = {};
+
+					var source = $('#activity-template').html();
+					var template = Handlebars.compile(source);
+
+					for (var i = 0; i < len; i++) {
+						code += template(res.rows.item(i));
+					}
+					console.log(code);
+					$('#my-activity-list').html(code);
+					$('#my-activity-list').listview('refresh');
+				}
+
+				$('#my-activity-list').listview('refresh');
+			});
+	});
+}
+
 function get_color() {
 	
 	db.transaction(function (tx) {
@@ -86,7 +120,7 @@ function addActivity(wine_id, activity_qty, activity_note) {
 		var start = new Date().getTime();
 		tx.executeSql("INSERT into activity (wine_id, activity_quantity, activity_note, created_at) values (?,?,?,?)", [wine_id, activity_qty, activity_note, start],
 		function(tx, res) {
-			return last_id("activity_id", "activity");
+			//return last_id("activity_id", "activity");
 		},
 		fR);
 	});

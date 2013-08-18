@@ -16,31 +16,20 @@ var yyyymmdd = d.yyyymmdd();
 function findPlaces() {
 	$.getJSON("https://api.foursquare.com/v2/venues/search?&ll=" + lat + "," + lng + "&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&query=wine store&limit=25&v=" + yyyymmdd,
 		function(data) {
-			console.log(data);
+			//console.log(data);
 			if(data.meta.code === 200) {
 				$.each(data.response.venues, function(i, venues) {
 						var venue_name = venues.name,
-							latlng = new google.maps.LatLng(venues.location.lat, venues.location.lng);
 							marker = new google.maps.Marker({
-								position: latlng,
+								position: new google.maps.LatLng(venues.location.lat, venues.location.lng),
 								map: map
 							});
 
-
-
 							if (venues.categories.length === 0) {
-								venue_image = "http://foursquare.com/img/categories/none_64.png"
+								venue_image = "http://foursquare.com/img/categories/none_32.png"
 							}
 							else {
-
 								venue_image = venues.categories[0].icon.prefix + '32.png';
-								console.log(venue_image);
-								// $(venues.categories).each(function(o, cats) {
-								// 	if (cats.primary) {
-								// 		venue_image = cats.icon;
-								// 		return false;
-								// 	}
-								// });
 							}
 
 							if(venues.location.address && venues.location.city) {
@@ -52,14 +41,12 @@ function findPlaces() {
 
 							var html = "<span class='venue_image' style='background:#CCC;float: left; margin-right: 10px;'><img src='"+venue_image+"'></span><div>"+venues.name+"</div>"+venue_info_city;
 							google.maps.event.addListener(marker, 'click', function() {
-								getInfoWindowEvent(marker,html);
+								map.setCenter(marker.getPosition());
+								infowindow.setContent(html);
+   								infowindow.open(map,marker);
 							});
-
-							
+	
 					});
-
-					
-				
 				
 			}
 		}
