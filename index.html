@@ -1,147 +1,153 @@
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]>    <html class="no-js iem7"> <![endif]-->
-<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <title>Corks</title>
-        <meta name="description" content="">
-        <meta name="HandheldFriendly" content="True">
-        <meta name="MobileOptimized" content="320">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-        <meta http-equiv="cleartype" content="on">
+<!doctype html>
+<!-- Conditional comment for mobile ie7 blogs.msdn.com/b/iemobile/ -->
+<!--[if IEMobile 7 ]>    <html class="no-js iem7" lang="en"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/touch/apple-touch-icon-144x144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touch/apple-touch-icon-114x114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch/apple-touch-icon-72x72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="img/touch/apple-touch-icon-57x57-precomposed.png">
-        <link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
+<head>
+  	<title>Corks - Cellar your Wine</title>
 
-        <!-- Tile icon for Win8 (144x144 + tile color) -->
-        <meta name="msapplication-TileImage" content="img/touch/apple-touch-icon-144x144-precomposed.png">
-        <meta name="msapplication-TileColor" content="#222222">
+	<meta name="description" content="">
 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="start_location_here">
+	<!-- For first-generation iPad: -->
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="start_location_hereg">
+	<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+	<link rel="apple-touch-icon-precomposed" href="start_location_here">
+	<link rel="apple-touch-startup-image" href="start_location_here" />  
+	<!-- Main Stylesheet -->
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
 
-        <!-- For iOS web apps. Delete if not needed. https://github.com/h5bp/mobile-boilerplate/issues/94 -->
-        <!--
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-title" content="">
-        -->
+	<!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
 
-        <!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
-        <!--
-        <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
-        -->
+	<!-- DB Creation Scripts -->
+	<script src="global.js"></script>
+	<script src="database.js"></script>
+	<script src="util.js"></script>
 
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.css">
-        <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-    </head>
-    <body>
+	<!-- For Label Errors -->
+	<style type="text/css" media="screen">
+		label.error  {  
+	      color:#FF0000;  
+	      font-weight:bold;  
+	    }
+	</style>
+</head>
 
+<body>
+	
 		<div id="activity" data-role="page">
 			<div data-role="header">
-			<h1>Activity</h1>
-				<div data-role="navbar" data-iconpos="bottom">
-					<ul> 
-						<li><a data-icon="star" data-transition="slide" class="ui-btn-active" href="#activity">Activity</a></li>
-						<li><a data-icon="grid" data-transition="slide" href="#manage">Manage</a></li>
-						<li><a data-icon="info" data-transition="slide" href="#find">Find</a></li>
-						<li><a data-icon="gear" data-transition="slide" href="#settings">Settings</a></li>
-						<li><a data-icon="search" data-transition="slide" href="#search">Search</a></li>
-					</ul>
-				</div>
-			</div>
-			<div data-role="content">
-				<p>page content</p>
-			</div>
+			<h1>Your Activity</h1>	
+			<a href="javascript:void(0);" data-role="button" onclick="grabActs();" class="ui-btn-right" data-icon="refresh">Refresh</a> 	
+			<div data-role="navbar" data-iconpos="bottom">
+				<ul>
+					<li><a data-icon="star" class="ui-btn-active" href="#activity">Activity</a></li>
+					<li><a data-icon="grid" href="#manage">Manage</a></li>
+					<li><a data-icon="info" href="#find">Find</a></li>
+					<li><a data-icon="gear" href="#settings">Settings</a></li>
+					<li><a data-icon="search" href="#search">Search</a></li>
+				</ul>
+			</div><!-- /navbar -->
+			</div><!-- /footer -->
+
+			<div id="my-activity" data-role="content">	
+				<ul data=role="list-view" id="my-activity-list"></ul>
+			</div><!-- /content -->
+
 			<div data-role="footer">
-				<p>footer</p>
-			</div>
+				<h4>Page Footer</h4>
+			</div><!-- /footer -->
 		</div>
 
 		<div id="manage" data-role="page">
 			<div data-role="header">
-			<h1>Manage</h1>
+				<h1>Manage</h1>		
 				<div data-role="navbar" data-iconpos="bottom">
-					<ul> 
-						<li><a data-icon="star" data-transition="slide" href="#activity">Activity</a></li>
-						<li><a data-icon="grid" data-transition="slide" class="ui-btn-active" href="#manage">Manage</a></li>
-						<li><a data-icon="info" data-transition="slide" href="#find">Find</a></li>
-						<li><a data-icon="gear" data-transition="slide" href="#settings">Settings</a></li>
-						<li><a data-icon="search" data-transition="slide" href="#search">Search</a></li>
+					<ul>
+						<li><a data-icon="star" href="#activity">Activity</a></li>
+						<li><a data-icon="grid" class="ui-btn-active" href="#manage">Manage</a></li>
+						<li><a data-icon="info" href="#find">Find</a></li>
+						<li><a data-icon="gear" href="#settings">Settings</a></li>
+						<li><a data-icon="search" href="#search">Search</a></li>
 					</ul>
-				</div>
-			</div>
-			<div data-role="content">
-				
-						<h2>Add A Wine</h2>
-						<form id="manage-form" data-ajax="false">
-							<label for="wine_name">Wine Name:</label>
-							<input type="text" name="wine_name" id="wine_name" data-mini="true">
-							<label for="winery_name">Winery Name:</label>
-							<input type="text" name="winery_name" id="winery_name" data-mini="true">
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
 
-							<label for="color_id" class="select">Color:</label>
-							<select name="wine_color" id="color_id" data-mini="true"></select>
+			<div class="page" data-role="content">
+				<h2>Add A Wine</h2>	
+				<div class="success" id="success-msg" style="display: none;">Awesome, your wine is created!</div>
+				<div class="error" id="error-msg" style="display: none;">You have errors in your form, please check the data.</div>
+				<form id="manage-form" data-ajax="false" onsubmit="handleForm(); return false;">
+					
+					<label for="wine_name">Wine Name:</label>
+					<input type="text" class="required" name="wine_name" id="wine_name" data-mini="true" />
+					
+					<label for="winery_name">Winery Name:</label>
+					<input type="text" class="required" name="winery_name" id="winery_name" data-mini="true" />
+					
+					<label for="color_id" class="select">Color:</label>
+					<select class="required" name="color_id" id="color_id" data-mini="true">
+					</select>
+					
+					<label for="wine_abv">Wine ABV:</label>
+					<input type="text" class="required" nname="wine_abv" id="wine_abv" data-mini="true" />
+					
+					<label for="wine_description">Wine Description:</label>
+					<textarea name="wine_description" id="wine_description"></textarea>
+					
+					<label for="is_add">Do you want to add this wine to your cellar?</label>
+					<input type="checkbox" name="is_add" onchange="toggleBox(this);" id="is_add" class="custom" />
+					
+					<div id="cellar_ques" style="display: none;">
+						
+						<label for="cellar_qty">Cellar Quantity:</label>
+						<input type="text" name="cellar_qty" id="cellar_qty" value=""  />
+					
+						<label for="cellar_description">Cellar Notes:</label>
+						<textarea name="cellar_description" id="cellar_description"></textarea>
+						
+					</div>
+					
+					<button>Add Wine</button>
+					
+				</form>
+							
+			</div><!-- /content -->
 
-							<label for="wine_description">Wine Description</label>
-							<textarea name="wine_description" id="wine_description">
-							</textarea>
+		</div>	
 
-							<label for="is_add">Do you want to add this wine to your cellar?</label>
-							<input type="checkbox" name="is_add" id="is_add" class="custom">
+			<div id="find" class="page" data-role="page">
+			<div data-role="header" data-position="inline">
+			<h1>Find</h1>
+			<a href="javascript:void(0);" data-role="button" onclick="refreshLocation();" class="ui-btn-right" data-icon="refresh">Refresh</a> 			
+			<div data-role="navbar" data-iconpos="bottom">
+				<ul>
+					<li><a data-icon="star" href="#activity">Activity</a></li>
+					<li><a data-icon="grid" href="#manage">Manage</a></li>
+					<li><a data-icon="info" class="ui-btn-active" href="#find">Find</a></li>
+					<li><a data-icon="gear" href="#settings">Settings</a></li>
+					<li><a data-icon="search" href="#search">Search</a></li>
+				</ul>
+			</div><!-- /navbar -->
+			</div><!-- /footer -->
+			
+			<div id="map" data-role="content" style="height: 500px; width: 100%;"></div><!-- /content -->
 
-							<div id="cellar_que" style="display:none;">
-								<label for="cellar_qty">Cellar Quantity: </label>
-								<input type="text" name="cellar_qty" id="cellar_qty" value="">
-								<label for="cellar_description">Cellar Notes:</label>
-								<textarea id="cellar_description" name="cellar_description"></textarea>
-							</div>
 
-			</form>
-			<div data-role="footer">
-				<p>footer</p>
-			</div>
 		</div>
 		
 	
 
-			
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.js"></script>
+	
+</div> <!--! end of #container -->
 
-	<script src="//cdnjs.cloudflare.com/ajax/libs/iScroll/5.0.4/iscroll-min.js"></script>
-	<script src="js/app.js"></script>
-    <script src="js/helper.js"></script>
-    <script src="js/webSQLinterface.js"></script>
-	<script>
-		
-		
-		window.addEventListener('load', function() {
-			setTimeout(function() {
-				window.scrollTo(0,1);
-			}, 0);
-		});
 
-		$(document).ready(function() {
-			$('#is_add').on('change', function(){
-				$this = $(this);
-				$cellar_que = $('#cellar_que');
 
-				if ($this.is(':checked')){
-					$cellar_que.show();
-					$cellar_que.find('input').addClass('required');
-				} else {
-					$cellar_que.hide();
-					$cellar_que.find('input').removeClass('required');
-				}
-			});
-			
-		});
-		
-	</script>
-       
-    </body>
+
+</body>
 </html>
