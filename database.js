@@ -22,7 +22,7 @@ function grabActivity() {
 					for (var i = 0; i < len; i++) {
 						code += template(res.rows.item(i));
 					}
-					console.log(code);
+					//console.log(code);
 					$('#my-activity-list').html(code);
 					$('#my-activity-list').listview('refresh');
 				}
@@ -30,6 +30,42 @@ function grabActivity() {
 				$('#my-activity-list').listview('refresh');
 			});
 	});
+}
+
+function viewWine(act_id) {
+			
+			db.transaction(function (tx) {
+				tx.executeSql("SELECT wine_name, wine_description, activity_note, activity_quantity, activity_id, activity.wine_id, activity.created_at from activity INNER JOIN wines on activity.wine_id = wines.wine_id where activity_id = ?", [act_id],
+				function(tx, res) {
+					if (res.rows.length == 0) {
+					
+					}
+					else
+					{
+						var code = "";
+
+						var start = new Date().getTime();
+	
+						diff = timeDifference(start, res.rows.item(0).created_at)
+	
+						code += "<h2>"+res.rows.item(0).wine_name+"</h2><p>Added <strong>" + res.rows.item(0).activity_quantity + "</strong> of these wines to your cellar. </p><label><strong>Your comment was</strong>:</label><p> "+res.rows.item(0).activity_note+"</p><label><strong>Wine Description</strong></label><p>"+res.rows.item(0).wine_description+"</p><p>You added this wine to your cellar: <strong>"+diff+"</strong></span>";
+
+						var source   = $("#share-template").html();
+						var template = Handlebars.compile(source);
+					 	code += template(res.rows.item(0));
+
+						$("#detail").html(code);	
+
+						//console.log("https://api.twitter.com/1.1/search/tweets.json?q="+res.rows.item(0).wine_name + "&oauth_token=18589938-q9Z4t0mxF0yWofOOktZB5eeLrFrjrMbVpjOVVTbaN&oauth_token_secret=axCROlcH5xZp0SBBgA55CC6264CbP7niIDZA3EagQM");
+						// Need to post get a response bear token and request?  https://dev.twitter.com/docs/api/1.1/post/oauth2/token
+						// Please note that as of March 5th, 2013 - this method will not longer be availble due to Twitter's API change. I recommend that take a look at oAuth Signing for this to work.
+						// $.POST("https://api.twitter.com/1.1/search/tweets.json?q="+res.rows.item(0).wine_name + "&oauth_token=18589938-q9Z4t0mxF0yWofOOktZB5eeLrFrjrMbVpjOVVTbaN&oauth_token_secret=axCROlcH5xZp0SBBgA55CC6264CbP7niIDZA3EagQM", function(data) {
+						// 	console.log (parseTweets(res.rows.item(0).wine_name, data)) 
+						// });
+					}
+				},
+				fR);
+			});
 }
 
 function get_color() {

@@ -64,4 +64,26 @@ function handleForm() {
 		return false;
 	}
 }
-	
+
+function timeDifference(current, previous) {
+	var msPerMinute = 60 * 1000,
+		msPerHour = msPerMinute * 60,
+		msPerDay = msPerHour * 24,
+		msPerMonth = msPerDay * 30,
+		msPerYear = msPerDay * 365;
+
+	var elapsed = current - previous;
+
+	if (elapsed < msPerMinute) {
+		return Math.round(elapsed/1000) + ' seconds ago';
+	}
+	else if (elapsed < msPerHour) {
+		return Math.round(elapsed/msPerMinute) + ' minutes ago';
+	}
+	else if (elapsed < msPerDay) {
+		return Math.round(elapsed/msPerHour) + ' hours ago';
+	}
+	else if (elapsed < msPerMonth) {
+		return Math.round(elapsed/msPerDay) + ' days ago';
+	}
+}

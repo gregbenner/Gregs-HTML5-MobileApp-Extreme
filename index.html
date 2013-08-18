@@ -22,8 +22,8 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.min.js"></script>
 
 	<!-- DB Creation Scripts -->
-	<script src="global.js"></script>
 	<script src="database.js"></script>
+	<script src="global.js"></script>
 	<script src="util.js"></script>
 	<script src="geo.js"></script>
 	<script src="social.js"></script>
@@ -143,6 +143,26 @@
 
 
 		</div>
+
+		<div id="wineDetail" data-role="page">
+	<div data-role="header" data-position="inline">
+		<h1>Wine Detail</h1>
+		<div data-role="navbar" data-iconpos="bottom">
+			<ul>
+				<li><a data-icon="star" href="#activity">Activity</a></li>
+				<li><a data-icon="grid" href="#manage">Manage</a></li>
+				<li><a data-icon="info" class="ui-btn-active" href="#find">Find</a></li>
+				<li><a data-icon="gear" href="#settings">Settings</a></li>
+				<li><a data-icon="search" href="#search">Search</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="detail" data-role="content">
+		
+	</div>
+	<!-- <div id="social"><p>Loading Social Results...</p></div> -->
+
+	</div>
 		
 	
 
@@ -157,6 +177,25 @@
 		<p class="pad">{{timeDiffActivity created_at}}</p>
 	</a>
 </li>
+</script>
+
+<script id="social-template" type="text/x-handlebars-template">
+<ul data=role="list-view" id="my-social-list">
+	<li data-role="list-divider" role="heading">Twitter Search Results</li>
+	{{#each results}}
+		<li><a rel="external" href="http://twitter.com/{{this.from_screen_name}}/statuses/{{id_str}}">
+			<img class="ui-li-thumb" src="{{this.profile_image_url}}">
+			<h2>{{this.from_user_name}}</h2>
+			<p>{{this.text}}</p>
+			<p>{{timeDiff this.created_at}}</p>
+		</li>
+	{{/each}}
+</ul>
+</script>
+
+<script id="share-template" type="text/x-handlebars-template">
+	<h3><a rel="external-link" href="https://twitter.com/intent/tweet?text=I+just+added+{{wine_name}}+to+my+cellar+using+Corks!">Tweet</a></h3>
+	<h3><a rel="external-link" href="http://facebook.com/sharer.php?u=http://localhost&title=I+just+added+{{wine_name}}+to+my+cellar+using+Corks!">Share on Facebook</a></h3>
 </script>
 
 
