@@ -1,5 +1,18 @@
+var map,
+	db,
+	lat,
+	lng,
+	infowindow = new google.maps.InfoWindow();
+
+
 $(document).ready(function(){
-		
+	newHash = window.location.hash.substring(1);
+	
+	if (newHash == "find") {
+		if ($.trim($("#map").html()) == "") {
+			navigator.geolocation.getCurrentPosition(successPosition, errorPosition);
+		}
+	}
 	
 		
 	db = openDatabase('myCorks', '1.0', 'My Corks Database', 2 * 1024 * 1024);

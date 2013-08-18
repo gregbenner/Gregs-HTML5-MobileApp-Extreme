@@ -23,11 +23,14 @@
 	<!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
 	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 	<!-- DB Creation Scripts -->
 	<script src="global.js"></script>
 	<script src="database.js"></script>
 	<script src="util.js"></script>
+	<script src="geo.js"></script>
+	<script src="social.js"></script>
 
 	<!-- For Label Errors -->
 	<style type="text/css" media="screen">
@@ -121,7 +124,7 @@
 
 		</div>	
 
-			<div id="find" class="page" data-role="page">
+		<div id="find" class="page" data-role="page">
 			<div data-role="header" data-position="inline">
 			<h1>Find</h1>
 			<a href="javascript:void(0);" data-role="button" onclick="refreshLocation();" class="ui-btn-right" data-icon="refresh">Refresh</a> 			
@@ -134,9 +137,12 @@
 					<li><a data-icon="search" href="#search">Search</a></li>
 				</ul>
 			</div><!-- /navbar -->
+			
+			
+
 			</div><!-- /footer -->
 			
-			<div id="map" data-role="content" style="height: 500px; width: 100%;"></div><!-- /content -->
+			<div id="map" data-role="content" style="height: 100%; width: 100%; min-height: 600px;"></div><!-- /content -->
 
 
 		</div>
