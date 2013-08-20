@@ -4,12 +4,30 @@ var map,
 	lng,
 	infowindow = new google.maps.InfoWindow();
 
+$('#my-activity-list').listview();
+
 $(window).bind('hashchange', function(e) {
 	newHash = window.location.hash.substring(1);
 	
 	if (newHash == "find") {
 		if ($.trim($("#map").html()) === "") {
-			navigator.geolocation.getCurrentPosition(successPosition, errorPosition);
+			var lastTime = myStorage.get("lastGeo");
+			if (lastTime) {
+				var currentTime = new Date().getTime();
+				var subtract = parseInt(currentTime, 10) - parseInt(lastTime, 10);
+				if(subtract > 250) {
+					console.log("need a new position");
+					navigator.geolocation.getCurrentPosition(successPosition, errorPosition);
+				}
+				else {
+					console.log("got an old one");
+					navigator.geolocation.getCurrentPosition(successPosition, errorPosition);
+				}
+			}
+			else {
+				navigator.geolocation.getCurrentPosition(successPosition, errorPosition);
+			}
+			
 		}
 		else if (newHash === "activity") {
 			grabActivity();
@@ -19,7 +37,38 @@ $(window).bind('hashchange', function(e) {
 		grabActivity();
 	}
 	e.preventDefault();
-})
+});
+
+var myStorage = {
+	set: function(a,b) {
+		var val = "";
+		if (typeof b == "object") {
+			val = JSON.stringify(b);
+		}
+		else {
+			val = b;
+		}
+		localStorage.setItem(a,val);
+	},
+	remove: function(a) {
+		localStorage.setItem(a, "");
+	},
+	get: function(a, b) {
+		if(b == "JSON") {
+			return JSON.parse(localStorage.getItem(a));
+		}
+		else {
+			return localStorage.getItem(a);
+		}
+	},
+	clear: function() {
+		localStorage.clear();
+	}
+};
+
+var currentTime = function() {
+	return new Date().getTime();
+};
 
 $(document).ready(function(){
 	

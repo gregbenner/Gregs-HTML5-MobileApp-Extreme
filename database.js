@@ -10,7 +10,7 @@ function grabActivity() {
 				}
 				else {
 					// results go here
-					$('#my-activity-list').listview();
+					
 
 					var len = res.rows.length,
 						code = "",
